@@ -1,4 +1,5 @@
 package com.zpc.order.runner;
+import com.alibaba.nacos.spring.context.annotation.config.NacosPropertySource;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -10,6 +11,7 @@ import org.springframework.web.client.RestTemplate;
  * @author Evan
  */
 @SpringBootApplication//申明这是一个Spring Boot项目
+@NacosPropertySource(dataId = "example", autoRefreshed = true)
 @ComponentScan(basePackages = {"com.zpc.order.controller", "com.zpc.order.service", "com.zpc.order.properties"})//手动指定bean扫描范围
 public class OrderApp {
     public static void main(String[] args) {

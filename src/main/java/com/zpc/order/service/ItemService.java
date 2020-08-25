@@ -1,6 +1,7 @@
 package com.zpc.order.service;
 
 
+import com.alibaba.nacos.api.config.annotation.NacosValue;
 import com.zpc.order.entity.Item;
 import com.zpc.order.properties.OrderProperties;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +22,11 @@ public class ItemService {
     @Autowired
     OrderProperties orderProperties;
 
+    @NacosValue(value = "${itemUrlConfig:'http://127.0.0.1:8100/'}", autoRefreshed = true)
+    private String itemUrl;
+
     public Item queryItemById(Long id) {
-        return this.restTemplate.getForObject(orderProperties.getItem().getUrl()
-                + id, Item.class);
+        return this.restTemplate.getForObject(itemUrl+"item/" + id, Item.class);
     }
 }
 
